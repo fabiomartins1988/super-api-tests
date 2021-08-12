@@ -31,4 +31,21 @@ describe('Users', () => {
       });
     });
   });
+
+  it('POST /users', () => {
+    const data = {
+      email: `test-${Math.floor(Math.random() * 9000)}@someemail.com`,
+      name: 'Test name',
+      gender: 'male',
+      status: 'inactive'
+    };
+
+    return request
+      .post('users')
+      .set('Authorization', `Bearer ${TOKEN_API}`)
+      .send(data)
+      .then((res) => {
+        expect(res.body.data).to.deep.include(data);
+      });
+  });
 });
