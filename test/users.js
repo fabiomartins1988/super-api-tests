@@ -48,4 +48,19 @@ describe('Users', () => {
         expect(res.body.data).to.deep.include(data);
       });
   });
+
+  it('PUT /users/:id', () => {
+    const data = {
+      status: 'active',
+      name: `Testoso - ${Math.floor(Math.random) * 9999}`
+    };
+
+    return request
+      .put('users/150')
+      .set('Authorization', `Bearer ${TOKEN_API}`)
+      .send(data)
+      .then((res) => {
+        expect(res.body.data).to.deep.include(data);
+      })
+  });
 });
